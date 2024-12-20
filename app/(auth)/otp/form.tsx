@@ -40,7 +40,7 @@ function OTPForm({}: OTPFormProps) {
         </InputOTP>
       </div>
 
-      <Button className="w-full bg-primary text-white" onClick={submitToken} disabled={value?.length !== 5}>
+      <Button className="w-full bg-primary text-white" onClick={submitToken} disabled={value?.length !== 5 || pending}>
         {pending ? "Submitting" : "Continue"}
       </Button>
     </>
