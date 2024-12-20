@@ -1,9 +1,9 @@
 import axios from "axios";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-const token = cookies().get("token")?.value;
+const token = 'cookies().get("token")?.value';
 
 axios.interceptors.response.use(
   (response) => {
