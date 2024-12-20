@@ -6,7 +6,7 @@ import Link from "next/link";
 import { createNewRole } from "../actions";
 import { useForm } from "react-hook-form";
 import { toast } from "@/hooks/use-toast";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 import { Permission } from "@/lib/types/role.type";
 import { ResponseData } from "@/lib/types/response.type";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,6 @@ import { Spinner } from "@/components/ui/spinner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   role_name: z.string().min(3),

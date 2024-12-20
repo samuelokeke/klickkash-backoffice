@@ -1,10 +1,10 @@
 import "server-only";
+
 import { cookies } from "next/headers";
 import { decodeJwt, SignJWT } from "jose";
 import { SessionPayload } from "./types/session.type";
 
-const secretKey = process.env.SESSION_SECRET;
-const encodedKey = new TextEncoder().encode("Klickcash.jwt.secret");
+const encodedKey = new TextEncoder().encode("");
 
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)

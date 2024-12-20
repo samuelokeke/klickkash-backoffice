@@ -76,7 +76,7 @@ export default function InviteUserDialog({ isOpen, setIsOpen, data }: InviteUser
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Invite users</DialogTitle>
-          <DialogDescription>Add user to a role. Click send when you're done.</DialogDescription>
+          <DialogDescription>Add user to a role. Click send when you&apos;re done.</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>

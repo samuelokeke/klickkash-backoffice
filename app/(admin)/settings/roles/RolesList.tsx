@@ -31,7 +31,7 @@ const RolesList = ({ roles }: RolesListProps) => {
     router.push(`/settings/roles/${roleId}`);
   };
 
-  const inviteUser = (event: MouseEvent<HTMLButtonElement>, roleId: string) => {
+  const inviteUser = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
     setIsOpen(true);
@@ -60,7 +60,7 @@ const RolesList = ({ roles }: RolesListProps) => {
             </TableCell>
             <TableCell className="text-right">{format(role.created_at, "yyy-MM-dd")}</TableCell>
             <TableCell className="text-right space-x-2">
-              <Button variant="ghost" onClick={(event) => inviteUser(event, role.id)}>
+              <Button variant="ghost" onClick={(event) => inviteUser(event)}>
                 Invite users
               </Button>
 

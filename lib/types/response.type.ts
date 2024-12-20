@@ -1,4 +1,4 @@
-export interface HttpResponse<T = {}> {
+export interface HttpResponse<T = unknown> {
   status: number;
   code: number;
   message: string;
