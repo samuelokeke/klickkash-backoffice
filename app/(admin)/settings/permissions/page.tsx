@@ -1,12 +1,12 @@
 import React from "react";
-import axios from "@/config/axios.config";
 import RolePermissionList from "./PermissionList";
 import { Button } from "@/components/ui/button";
+import { getRolePermissions } from "./actions";
 
 const Permissions = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/permissions`);
+  const response = await getRolePermissions();
 
-  const role = response.data?.data;
+  const role = response.data;
 
   return (
     <div>

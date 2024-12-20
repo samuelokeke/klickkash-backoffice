@@ -1,11 +1,11 @@
 import React from "react";
 import CreateRoleForm from "./form";
-import axios from "@/config/axios.config"
+import { getRolePermissions } from "../../permissions/actions";
 
 const CreateRole = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/permissions`);
+  const response = await getRolePermissions();
 
-  const data = response.data?.data;
+  const data = response?.data;
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ForgotPasswordForm from "./form";
 
 const ResetPassword = () => {
@@ -9,7 +9,9 @@ const ResetPassword = () => {
         <p className="text-sm">Let&apos;s help you get your password back</p>
       </figcaption>
 
-      <ForgotPasswordForm />
+      <Suspense>
+        <ForgotPasswordForm />
+      </Suspense>
     </figure>
   );
 };

@@ -1,12 +1,13 @@
 import React from "react";
-import axios from "@/config/axios.config";
+import { getRoles } from "./roles/actions";
+import { getRolePermissions } from "./permissions/actions";
 
 const Settings = async () => {
-  const rolesResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles`);
-  const permResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/permissions`);
+  const rolesResponse = await getRoles();
+  const permResponse = await getRolePermissions();
 
-  const roles = rolesResponse.data?.data;
-  const permissions = permResponse.data?.data;
+  const roles = rolesResponse?.data;
+  const permissions = permResponse.data;
 
   return (
     <div>

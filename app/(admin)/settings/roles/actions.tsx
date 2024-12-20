@@ -1,18 +1,23 @@
 "use server";
 
-import { isAxiosError } from "axios";
-import axios from "@/config/axios.config";
+import { cookies } from "next/headers";
 
 /**
  * get all role permissions
  * @returns RolePermissions
  */
-export const getRolePermissions = async () => {
-  try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/permissions`);
+export const getRoles = async () => {
+  const token = await cookies().get("token")?.value;
 
-    if (response.status === 200) {
-      return response.data?.data;
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      return response.json();
     }
   } catch (error) {}
 };
@@ -30,11 +35,18 @@ type CreateRoleProps = {
 };
 
 export const createNewRole = async (values: CreateRoleProps) => {
+  const token = await cookies().get("token")?.value;
+
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles`, values);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(values),
+    });
 
     if (response.status === 201) {
-      return response.data;
+      return response.json();
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -56,6 +68,8 @@ type InviteUserToRoleProps = {
 };
 
 export const inviteUserToRole = async (role_id: string, values: InviteUserToRoleProps) => {
+  const token = await cookies().get("token")?.value;
+
   const payload = {
     first_name: values.first_name,
     last_name: values.last_name,
@@ -65,20 +79,23 @@ export const inviteUserToRole = async (role_id: string, values: InviteUserToRole
   };
 
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/invite`, payload);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles/invite`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
     if (response.status === 201) {
-      return response.data;
+      return response.json();
     }
   } catch (error) {
-    if (isAxiosError(error)) {
-      if (error.response) {
-        return { message: error.response.data.message };
-      }
+    if (typeof error === "object" && error !== null && "response" in error) {
+      const response = (error as { response?: { data: { message: string } } }).response;
+
+      return { message: response?.data.message };
     } else if (error instanceof Error) {
-      if (error instanceof Error) {
-        return { message: error.message };
-      }
+      return { message: error.message };
     }
   }
 };

@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function createUser(prevState: any, formData: FormData) {
+export async function createUser(prevState: unknown, formData: FormData) {
   const payload = {
     email: formData.get("email"),
     password: formData.get("password"),

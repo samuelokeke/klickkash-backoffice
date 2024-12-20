@@ -1,11 +1,11 @@
 import React from "react";
-import axios from "@/config/axios.config";
 import CustomerList from "./CustomerList";
+import { getCustomers } from "./actions";
 
 const Customers = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin//customers`);
+  const response = await getCustomers();
 
-  const customers = response.data?.data;
+  const customers = response.data;
 
   return (
     <div className="p-6 bg-background">

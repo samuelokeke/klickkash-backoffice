@@ -1,12 +1,12 @@
 import React from "react";
-import axios from "@/config/axios.config";
 import RolesList from "./RolesList";
 import RolesHeader from "./RolesHeader";
+import { getRoles } from "./actions";
 
 const Roles = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/roles`);
+  const response = await getRoles();
 
-  const roles = response.data?.data;
+  const roles = response?.data;
 
   return (
     <div>
